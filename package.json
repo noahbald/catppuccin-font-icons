@@ -1,0 +1,38 @@
+{
+  "publisher": "Catppuccin",
+  "name": "catppuccin-nerd-font",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Soothing pastel icon theme for Nerd Fonts",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm --prefix vscode-icons install && wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FontPatcher.zip && unzip FontPatcher.zip -d font-patcher && rm -rf FontPatcher.zip",
+    "build": "npm --prefix vscode-icons run build:themes && npm run build:unicode-files && npm run build:themes",
+    "build:unicode-files": "node src/index.mjs",
+    "build:themes": "npm run build:frappe && npm run build:latte && npm run build:macchiato && npm run build:mocha",
+    "build:frappe": "svgicons2svgfont --fontname=catppuccin-icons-frappe -o themes/frappe.svg themes/frappe/*.svg && svg2ttf themes/frappe.svg themes/frappe.ttf",
+    "build:latte": "svgicons2svgfont --fontname=catppuccin-icons-latte -o themes/latte.svg themes/latte/*.svg && svg2ttf themes/latte.svg themes/latte.ttf",
+    "build:macchiato": "svgicons2svgfont --fontname=catppuccin-icons-macchiato -o themes/macchiato.svg themes/macchiato/*.svg && svg2ttf themes/macchiato.svg themes/macchiato.ttf",
+    "build:mocha": "svgicons2svgfont --fontname=catppuccin-icons-mocha -o themes/mocha.svg themes/mocha/*.svg && svg2ttf themes/mocha.svg themes/mocha.ttf",
+    "build:forge": "./font-patcher/font-patcher test-font.ttf --custom ../../../themes/latte.ttf --name catppuccin-latte"
+  },
+  "keywords": [
+    "catppuccin",
+    "theme",
+    "fancy",
+    "pastel-colors",
+    "nerd-font",
+    "patcher",
+    "icon-font",
+    "patched-fonts"
+  ],
+  "author": "noahbald",
+  "license": "MIT",
+  "engines": {
+    "node": ">20"
+  },
+  "devDependencies": {
+    "svg2ttf": "^6.0.3",
+    "svgicons2svgfont": "^12.0.0"
+  }
+}
